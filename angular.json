@@ -127,6 +127,7 @@
   },
   "defaultProject": "StateManagement",
   "cli": {
-    "analytics": "bfb02084-4334-4d67-b480-1f8478d16d9c"
+    "analytics": "bfb02084-4334-4d67-b480-1f8478d16d9c",
+    "defaultCollection": "@datorama/akita"
   }
 }
