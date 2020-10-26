@@ -6,7 +6,10 @@ import { AkitaRowComponent } from './akita-row/akita-row.component';
 
 
 @NgModule({
-  declarations: [AkitaTableComponent, AkitaRowComponent],
+  declarations: [
+    AkitaTableComponent,
+    AkitaRowComponent
+  ],
   imports: [
     CommonModule
   ]

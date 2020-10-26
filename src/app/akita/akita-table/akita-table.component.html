@@ -1,1 +1,3 @@
-<p>akita-table works!</p>
+<div *ngFor="let row of rows$ | async; trackBy: trackByFn; let i = index">
+  <app-akita-row [row]="row"></app-akita-row>
+</div>

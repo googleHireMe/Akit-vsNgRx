@@ -7,6 +7,7 @@ import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { environment } from '../environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { NgrxModule } from './ngrx/ngrx.module';
+import { AkitaModule } from './akita/akita.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { NgrxModule } from './ngrx/ngrx.module';
     AppRoutingModule,
     environment.production ? [] : AkitaNgDevtools.forRoot(),
     StoreModule.forRoot({}, {}),
-    NgrxModule
+    NgrxModule,
+    AkitaModule
   ],
   providers: [],
   bootstrap: [AppComponent]

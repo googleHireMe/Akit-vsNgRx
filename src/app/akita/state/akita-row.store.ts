@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store, StoreConfig, EntityState, EntityStore } from '@datorama/akita';
+import { Row } from '../../models/row';
 
 export interface AkitaRowState extends EntityState<Row, number> {
-  selectedTask: Task;
 }
 
 const createInitialState = () => ({});
