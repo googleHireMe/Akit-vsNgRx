@@ -8,7 +8,7 @@ import { environment } from '../environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { NgrxModule } from './ngrx/ngrx.module';
 import { AkitaModule } from './akita/akita.module';
-
+import { TableModule } from './table/table.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -17,9 +17,9 @@ import { AkitaModule } from './akita/akita.module';
     BrowserModule,
     AppRoutingModule,
     environment.production ? [] : AkitaNgDevtools.forRoot(),
-    StoreModule.forRoot({}, {}),
     NgrxModule,
-    AkitaModule
+    AkitaModule,
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

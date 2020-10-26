@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Row } from 'src/app/models/row';
 import { AkitaRowQuery } from '../state/akita-row.query';
@@ -7,7 +7,8 @@ import { AkitaRowStore } from '../state/akita-row.store';
 @Component({
   selector: 'app-akita-table',
   templateUrl: './akita-table.component.html',
-  styleUrls: ['./akita-table.component.scss']
+  styleUrls: ['./akita-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AkitaTableComponent {
 

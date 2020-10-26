@@ -2,11 +2,13 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { Row } from '../../models/row';
 
 @Component({
-  selector: 'app-akita-row',
-  templateUrl: './akita-row.component.html',
-  styleUrls: ['./akita-row.component.scss'],
+  selector: 'app-row',
+  templateUrl: './row.component.html',
+  styleUrls: ['./row.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AkitaRowComponent {
+export class RowComponent {
+
   @Input() row: Row;
+
 }
