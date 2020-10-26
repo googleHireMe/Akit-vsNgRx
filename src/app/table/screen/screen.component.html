@@ -6,11 +6,11 @@
   <button (click)="add()">Add</button>
   <button (click)="update()">Update</button>
 </div>
-<div *ngIf="selectedStateManager === StateManager.Akita">
-  Akita Table
-  <app-table [rows]="akitaRows$ | async"></app-table>
-</div>
 <div *ngIf="selectedStateManager === StateManager.NgRx">
   NgRx Table
   <app-table [rows]="ngrxRows$ | async"></app-table>
+</div>
+<div *ngIf="selectedStateManager === StateManager.Akita">
+  Akita Table
+  <app-table [rows]="akitaRows$ | async"></app-table>
 </div>

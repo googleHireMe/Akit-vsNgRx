@@ -14,9 +14,6 @@ const initialState: NgrxRowsState = rowsAdapter.getInitialState({});
 
 const reducer = createReducer(
   initialState,
-  on(RowActions.testRow, (state) => {
-    return state;
-  }),
   on(RowActions.addRow, (state, { row }) => {
     return rowsAdapter.addOne(row, state);
   }),
