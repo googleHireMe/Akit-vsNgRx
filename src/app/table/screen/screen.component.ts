@@ -1,12 +1,12 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AkitaRowQuery } from 'src/app/akita/state/akita-row.query';
-import { StateManager, UpdateMethod } from 'src/app/models/enums';
-import { Row } from 'src/app/models/row';
-import { NgrxAppState } from 'src/app/ngrx/ngrx-store.module';
-import { selectRows } from 'src/app/ngrx/state/row.selectors';
-import { TesterService } from 'src/app/services/tester.service';
+import { AkitaRowQuery } from '../../akita/state/akita-row.query';
+import { StateManager, UpdateMethod } from '../../models/enums';
+import { Row } from '../../models/row';
+import { NgrxAppState } from '../../ngrx/ngrx-store.module';
+import { selectRows } from '../../ngrx/state/row.selectors';
+import { TesterService } from '../../services/tester.service';
 
 @Component({
   selector: 'app-screen',
