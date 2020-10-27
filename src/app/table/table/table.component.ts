@@ -16,8 +16,4 @@ export class TableComponent {
       return item.id;
   }
 
-  ngOnChanges(){
-    debugger;
-  }
-
 }

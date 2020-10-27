@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AkitaRowQuery } from 'src/app/akita/state/akita-row.query';
@@ -25,7 +25,8 @@ export class ScreenComponent {
 
   constructor(private testerService: TesterService,
               private ngrxStore: Store<NgrxAppState>,
-              private akitaQuery: AkitaRowQuery) { }
+              private akitaQuery: AkitaRowQuery) {
+  }
 
   selectStateManager(manager: StateManager): void {
     this.testerService.stateManager = manager;
