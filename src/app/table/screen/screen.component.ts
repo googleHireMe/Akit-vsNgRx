@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AkitaRowQuery } from 'src/app/akita/state/akita-row.query';
-import { StateManager } from 'src/app/models/enums';
+import { StateManager, UpdateMethod } from 'src/app/models/enums';
 import { Row } from 'src/app/models/row';
 import { NgrxAppState } from 'src/app/ngrx/ngrx-store.module';
 import { selectRows } from 'src/app/ngrx/state/row.selectors';
@@ -18,9 +18,14 @@ export class ScreenComponent {
   ngRxRows$: Observable<Row[]> = this.ngrxStore.select(selectRows);
   akitaRows$: Observable<Row[]> = this.akitaQuery.rows$;
   StateManager = StateManager;
+  UpdateMethod = UpdateMethod;
 
   get selectedStateManager(): StateManager {
     return this.testerService.stateManager;
+  }
+
+  get selectedUpdateMethod(): UpdateMethod {
+    return this.testerService.updateMethod;
   }
 
   constructor(private testerService: TesterService,
@@ -30,6 +35,10 @@ export class ScreenComponent {
 
   selectStateManager(manager: StateManager): void {
     this.testerService.stateManager = manager;
+  }
+
+  selectUpdateMethod(method: UpdateMethod): void {
+    this.testerService.updateMethod = method;
   }
 
   add(): void {

@@ -4,22 +4,17 @@ import * as faker from 'faker';
 import { AkitaRowStore } from '../akita/state/akita-row.store';
 import { Row } from '../models/row';
 import { NgrxAppState } from '../ngrx/ngrx-store.module';
-import { addRow, updateRow } from '../ngrx/state/row.actions';
+import { addRow, setRow, updateRow } from '../ngrx/state/row.actions';
 import { DataService } from './data.service';
-import { StateManager } from '../models/enums';
+import { StateManager, UpdateMethod } from '../models/enums';
+import { Update } from '@ngrx/entity';
 
 @Injectable({ providedIn: 'root' })
 export class TesterService {
 
-  get stateManager(): StateManager {
-    return this._stateManager;
-  }
-  set stateManager(manager: StateManager) {
-    this._stateManager = manager;
-  }
-
-  private _stateManager: StateManager;
-  private rows: Row[] = [];
+  stateManager: StateManager;
+  updateMethod: UpdateMethod;
+  private rows: Row[];
 
   constructor(private ngrxStore: Store<NgrxAppState>,
               private akitaStore: AkitaRowStore,
@@ -29,7 +24,7 @@ export class TesterService {
 
 
   add(): void {
-    console.time('Adding items');
+    console.time(`[${this.stateManager}] Adding items`);
     const portions = this.dataService.rowsCount / 10;
     for (let index = 0; index < portions; index++) {
       const from = index * 10;
@@ -46,31 +41,42 @@ export class TesterService {
       });
     }
     setTimeout(() => {
-      console.timeEnd('Adding items');
+      console.timeEnd(`[${this.stateManager}] Adding items`);
     });
   }
 
   update(): void {
-    console.time('Updating items');
+    console.time(`[${this.stateManager}][${this.updateMethod}] Updating items`);
     let currentItertaion = 0;
     const intervalId = setInterval(() => {
       for (let index = 0; index < this.dataService.itemsCountToUpdate; index++) {
         const randItemIndex = Math.floor(Math.random() * this.dataService.rowsCount);
         const itemToUpdate = Math.floor(Math.random() * 10);
         const newText = faker.name.firstName();
-        const newRow = { ...this.rows[randItemIndex], [`item${itemToUpdate}`]: newText };
 
         if (this.stateManager === StateManager.Akita) {
-          this.updateAkita(newRow);
+          if (this.updateMethod === UpdateMethod.Set) {
+            const newRow = { ...this.rows[randItemIndex], [`item${itemToUpdate}`]: newText };
+            this.setAkita(newRow);
+          }
+          if (this.updateMethod === UpdateMethod.Update) {
+            this.updateAkita(randItemIndex, { [`item${itemToUpdate}`]: newText });
+          }
         }
         if (this.stateManager === StateManager.NgRx) {
-          this.updateNgrx(newRow);
+          if (this.updateMethod === UpdateMethod.Set) {
+            const newRow = { ...this.rows[randItemIndex], [`item${itemToUpdate}`]: newText };
+            this.setNgrx(newRow);
+          }
+          if (this.updateMethod === UpdateMethod.Update) {
+            this.updateNgrx(randItemIndex, { [`item${itemToUpdate}`]: newText });
+          }
         }
       }
 
       if (currentItertaion >= this.dataService.iterationsCount) {
         clearInterval(intervalId);
-        console.timeEnd('Updating items');
+        console.timeEnd(`[${this.stateManager}][${this.updateMethod}] Updating items`);
       }
       currentItertaion++;
     });
@@ -84,12 +90,21 @@ export class TesterService {
     this.akitaStore.add(row);
   }
 
-  private updateNgrx(row: Row): void {
-    this.ngrxStore.dispatch(updateRow({ row }));
+  private setNgrx(row: Row): void {
+    this.ngrxStore.dispatch(setRow({ row }));
   }
 
-  private updateAkita(row: Row): void {
+  private setAkita(row: Row): void {
     this.akitaStore.upsert(row.id, row);
+  }
+
+  private updateNgrx(index: number, changes: Partial<Row>): void {
+    const update: Update<Row> = { id: index, changes };
+    this.ngrxStore.dispatch(updateRow({ update }));
+  }
+
+  private updateAkita(index: number, changes: Partial<Row>): void {
+    this.akitaStore.update(index, changes);
   }
 
 

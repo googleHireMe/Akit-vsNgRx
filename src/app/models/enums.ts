@@ -1,4 +1,9 @@
 export enum StateManager {
-  Akita = 1,
-  NgRx = 2
+  Akita = 'Akita',
+  NgRx = 'NgRx'
+}
+
+export enum UpdateMethod {
+  Set = 'Set',
+  Update = 'Update'
 }

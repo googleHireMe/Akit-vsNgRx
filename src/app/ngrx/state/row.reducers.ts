@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as RowActions from './row.actions';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { EntityState, EntityAdapter, createEntityAdapter, Update } from '@ngrx/entity';
 import { Row } from '../../models/row';
 
 export interface NgrxRowsState extends EntityState<Row> {
@@ -17,9 +17,12 @@ const reducer = createReducer(
   on(RowActions.addRow, (state, { row }) => {
     return rowsAdapter.addOne(row, state);
   }),
-  on(RowActions.updateRow, (state, { row }) => {
+  on(RowActions.setRow, (state, { row }) => {
     return rowsAdapter.setOne(row, state);
-  })
+  }),
+  on(RowActions.updateRow, (state, { update }) => {
+    return rowsAdapter.updateOne(update, state);
+  }),
 );
 
 export function rowsReducer(state: NgrxRowsState | undefined = initialState, action: Action): NgrxRowsState {

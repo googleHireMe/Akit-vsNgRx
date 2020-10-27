@@ -1,16 +1,25 @@
 <div>
+  <h3>SelectedStateManager: {{selectedStateManager}}</h3>
   <button (click)="selectStateManager(StateManager.NgRx)">NgRx</button>
   <button (click)="selectStateManager(StateManager.Akita)">Akita</button>
 </div>
 <div *ngIf="!!selectedStateManager">
-  <button (click)="add()">Add</button>
-  <button (click)="update()">Update</button>
+  <h3>Update method: {{selectedUpdateMethod}}</h3>
+  <button (click)="selectUpdateMethod(UpdateMethod.Set)">Set</button>
+  <button (click)="selectUpdateMethod(UpdateMethod.Update)">Update</button>
 </div>
-<div *ngIf="selectedStateManager === StateManager.NgRx">
-  NgRx Table
-  <app-table [rows]="(ngRxRows$ | async)"></app-table>
-</div>
-<div *ngIf="selectedStateManager === StateManager.Akita">
-  Akita Table
-  <app-table [rows]="(akitaRows$ | async)"></app-table>
+<div *ngIf="!!selectedStateManager && !!selectedUpdateMethod">
+  <div>
+    <h3>Actions:</h3>
+    <button (click)="add()">Add 1000 rows</button>
+    <button (click)="update()">Update 50000 times</button>
+  </div>
+  <div *ngIf="selectedStateManager === StateManager.NgRx">
+    <h3>NgRx Table</h3>
+    <app-table [rows]="(ngRxRows$ | async)"></app-table>
+  </div>
+  <div *ngIf="selectedStateManager === StateManager.Akita">
+    <h3>Akita Table</h3>
+    <app-table [rows]="(akitaRows$ | async)"></app-table>
+  </div>
 </div>
