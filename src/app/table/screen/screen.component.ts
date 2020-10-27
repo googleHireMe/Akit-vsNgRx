@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AkitaRowQuery } from 'src/app/akita/state/akita-row.query';
 import { StateManager } from 'src/app/models/enums';
 import { Row } from 'src/app/models/row';
-import { NgrxAppState } from 'src/app/ngrx/state/ngrx-store.module';
+import { NgrxAppState } from 'src/app/ngrx/ngrx-store.module';
 import { selectRows } from 'src/app/ngrx/state/row.selectors';
 import { TesterService } from 'src/app/services/tester.service';
 

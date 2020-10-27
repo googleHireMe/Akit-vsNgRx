@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import * as faker from 'faker';
 import { AkitaRowStore } from '../akita/state/akita-row.store';
 import { Row } from '../models/row';
-import { NgrxAppState } from '../ngrx/state/ngrx-store.module';
+import { NgrxAppState } from '../ngrx/ngrx-store.module';
 import { addRow, updateRow } from '../ngrx/state/row.actions';
 import { DataService } from './data.service';
 import { StateManager } from '../models/enums';
