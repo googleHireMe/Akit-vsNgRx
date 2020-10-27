@@ -1,6 +1,7 @@
 export enum StateManager {
   Akita = 'Akita',
-  NgRx = 'NgRx'
+  NgRx = 'NgRx',
+  NgRxPlain = 'NgRxPlain'
 }
 
 export enum UpdateMethod {

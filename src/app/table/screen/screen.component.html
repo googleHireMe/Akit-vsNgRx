@@ -2,6 +2,7 @@
   <h3>SelectedStateManager: {{selectedStateManager}}</h3>
   <button (click)="selectStateManager(StateManager.NgRx)">NgRx</button>
   <button (click)="selectStateManager(StateManager.Akita)">Akita</button>
+  <button (click)="selectStateManager(StateManager.NgRxPlain)">NgRxPlain</button>
 </div>
 <div *ngIf="!!selectedStateManager">
   <h3>Update method: {{selectedUpdateMethod}}</h3>
@@ -21,5 +22,9 @@
   <div *ngIf="selectedStateManager === StateManager.Akita">
     <h3>Akita Table</h3>
     <app-table [rows]="(akitaRows$ | async)"></app-table>
+  </div>
+  <div *ngIf="selectedStateManager === StateManager.NgRxPlain">
+    <h3>NgRxPlain Table</h3>
+    <app-table [rows]="(ngRxPlainRows$ | async)"></app-table>
   </div>
 </div>

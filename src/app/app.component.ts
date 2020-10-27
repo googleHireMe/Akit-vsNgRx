@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { enableAkitaProdMode } from '@datorama/akita';
 
 @Component({
@@ -6,10 +6,10 @@ import { enableAkitaProdMode } from '@datorama/akita';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'StateManagement';
 
-  ngOnInit(){
+  ngOnInit(): void {
     enableAkitaProdMode();
   }
 }

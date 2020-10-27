@@ -8,6 +8,7 @@ import { addRow, setRow, updateRow } from '../ngrx/state/row.actions';
 import { DataService } from './data.service';
 import { StateManager, UpdateMethod } from '../models/enums';
 import { Update } from '@ngrx/entity';
+import { Add, Update as UpdateAction } from '../ngrx/state/row-plain.reducer';
 
 @Injectable({ providedIn: 'root' })
 export class TesterService {
@@ -37,6 +38,9 @@ export class TesterService {
         }
         if (this.stateManager === StateManager.NgRx) {
           this.addNgrx(item);
+        }
+        if (this.stateManager === StateManager.NgRxPlain) {
+          this.ngrxStore.dispatch(new Add(item));
         }
       });
     }
@@ -71,6 +75,9 @@ export class TesterService {
           if (this.updateMethod === UpdateMethod.Update) {
             this.updateNgrx(randItemIndex, { [`item${itemToUpdate}`]: newText });
           }
+        }
+        if (this.stateManager === StateManager.NgRxPlain) {
+          this.ngrxStore.dispatch(new UpdateAction({ itemIndex: randItemIndex, property: `item${itemToUpdate}`, value: newText }));
         }
       }
 

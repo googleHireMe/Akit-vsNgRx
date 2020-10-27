@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AkitaRowQuery } from 'src/app/akita/state/akita-row.query';
 import { StateManager, UpdateMethod } from 'src/app/models/enums';
@@ -15,6 +15,7 @@ import { TesterService } from 'src/app/services/tester.service';
 })
 export class ScreenComponent {
 
+  ngRxPlainRows$: Observable<Row[]> = this.ngrxStore.pipe(select('rowsPlainState', 'rows'));
   ngRxRows$: Observable<Row[]> = this.ngrxStore.select(selectRows);
   akitaRows$: Observable<Row[]> = this.akitaQuery.rows$;
   StateManager = StateManager;
